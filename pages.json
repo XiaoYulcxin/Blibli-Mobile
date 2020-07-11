@@ -1,0 +1,215 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index",
+			"style": {
+				"app-plus":{
+					"titleNView":{
+						"searchInput":{
+							"align":"left",
+							"disabled":true,
+							"backgroundColor":"#F6F7F8",
+							"borderRadius":"20px",
+							"placeholder":"精彩热搜：我的青春恋爱物语果然有问题。完",
+							"placeholderColor":"#959FA0"
+						},
+						"buttons":[{
+							"color":"#333C4F",
+							"colorPressed":"#00D8A0",
+							"float":"right",
+							"fontSrc":"/static/icon.ttf",
+							"fontSize":"22px",
+							"text":"\ue61a"
+						}]
+					}
+				}
+			}
+		}
+	    ,{
+            "path" : "pages/category/category",
+            "style" : {
+				"app-plus":{
+					"titleNView":{
+						"searchInput":{
+							"align":"left",
+							"disabled":true,
+							"backgroundColor":"#F6F7F8",
+							"borderRadius":"20px",
+							"placeholder":"精彩热搜：我的青春恋爱物语果然有问题。完",
+							"placeholderColor":"#959FA0"
+						}
+					}
+				}
+			}
+        }
+		,{
+		    "path" : "pages/dynamic/dynamic",
+		    "style" : {
+				"app-plus":{
+					"titleNView":{
+						"searchInput":{
+							"align":"left",
+							"disabled":true,
+							"backgroundColor":"#F6F7F8",
+							"borderRadius":"20px",
+							"placeholder":"精彩热搜：我的青春恋爱物语果然有问题。完",
+							"placeholderColor":"#959FA0"
+						}
+					}
+				}
+			}
+		}
+        ,{
+            "path" : "pages/my/my",
+            "style" : {
+				"navigationBarTitleText":" ",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"color":"#333C4F",
+							"colorPressed":"#00D8A0",
+							"float":"right",
+							"fontSrc":"/static/icon.ttf",
+							"fontSize":"22px",
+							"text":"\ue695"
+						},{
+							"color":"#333C4F",
+							"colorPressed":"#00D8A0",
+							"float":"right",
+							"fontSrc":"/static/icon.ttf",
+							"fontSize":"22px",
+							"text":"\ue61a"
+						}]
+					}
+				}
+			}
+        }
+        ,{
+            "path" : "pages/detail-video/detail-video",
+            "style" : {
+				// #ifdef APP-VUE
+				"navigationBarTextStyle":"white",
+				// #endif
+				"navigationBarTitleText":"视频详情页",
+				"app-plus":{
+					// #ifdef APP-VUE
+					"titleNView":false,
+					// #endif
+					"subNVues":[{
+						"id":"top",
+						"path":"pages/detail-video/subNVue/video",
+						"style":{
+							"position": "dock",
+							"dock":"top",
+							"height":"225px",
+							"width":"100%"
+						}
+					}]
+				}
+			}
+        }
+        ,{
+            "path" : "pages/login/login",
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+				}
+			}
+        }
+        ,{
+            "path" : "pages/user-space/user-space",
+            "style" : {
+				"enablePullDownRefresh":true,
+				"app-plus":{
+					"titleNView":{
+						"type":"transparent",
+						"buttons":[{
+							"type":"menu"
+						}]
+					}
+				}
+			}
+        }
+        ,{
+            "path" : "pages/user-video/user-video",
+            "style" : {
+				"navigationBarTitleText":"我的作品"
+			}
+        }
+        ,{
+            "path" : "pages/user-fava/user-fava",
+            "style" : {
+				"navigationBarTitleText":"我的收藏"
+			}
+        }
+		,{
+		    "path" : "pages/user-follow/user-follow",
+		    "style" : {
+				"navigationBarTitleText":"我的关注"
+			}
+		}
+		,{
+		    "path" : "pages/user-record/user-record",
+		    "style" : {
+				"navigationBarTitleText":"历史记录"
+			}
+		}
+        ,{
+            "path" : "pages/create/create",
+            "style" : {
+				"navigationBarTitleText":"发布作品",
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"text":"发布",
+							"color":"#fb7299",
+							"fontSize":"14px"
+						}]
+					}
+				}
+			}
+        }
+        ,{
+            "path" : "pages/user-video-list/user-video-list",
+            "style" : {
+				"navigationBarTitleText":"视频列表"
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "哔哩哔哩动画",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#333C4F",
+		"selectedColor": "#fb7299",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/index/index",
+				"text": "发现",
+				"iconPath": "static/tabbar/find.png",
+				"selectedIconPath": "static/tabbar/find-select.png"
+			},
+			{
+				"pagePath": "pages/category/category",
+				"text": "分类",
+				"iconPath": "static/tabbar/cate.png",
+				"selectedIconPath": "static/tabbar/cate-select.png"
+			},
+			{
+				"pagePath": "pages/dynamic/dynamic",
+				"text": "动态",
+				"iconPath": "static/tabbar/news.png",
+				"selectedIconPath": "static/tabbar/news-select.png"
+			},
+			{
+				"pagePath": "pages/my/my",
+				"text": "我的",
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/my-select.png"
+			}
+		]
+	}
+}

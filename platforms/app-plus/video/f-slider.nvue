@@ -1,0 +1,113 @@
+<template>
+	<div ref="slider" class="flex align-center justify-center position-relative" style="height: 44px;" @touchmove.stop.prevent="touchMove" @touchend="touchEnd" @touchstart="touchStart">
+		<!-- 进度条 -->
+		<div class="flex-1 bg-noactive rounded" style="height: 3px;">
+			<div class="bg-main" style="height: 3px;" :style="activeStyle"></div>
+		</div>
+		<!-- 指示点 -->
+		<div class="rounded-circle bg-main-hover f-dot":style="activeDotStyle"></div>
+	</div>
+</template>
+
+<script>
+	const dom = weex.requireModule('dom')
+	export default {
+		props: {
+			c: {
+				type: Number,
+				default: 0
+			},
+			d:{
+				type: Number,
+				default: 0
+			},
+			fullScreen:{
+				type:Boolean,
+				default:false
+			}
+		},
+		data() {
+			return {
+				w: 0, // 总宽度
+				l:0,
+				activeWidth:0, // 进度条宽度
+				moveStatus:false,
+				
+				ratio:1,
+			}
+		},
+		mounted() {
+			let res = uni.getSystemInfoSync()
+			this.ratio = res.screenHeight / res.screenWidth
+			setTimeout(()=>{
+				this.getSize()
+			},100)
+		},
+		computed: {
+			// 进度条宽度变化
+			activeStyle() {
+				return `width:${this.activeWidth}px` 
+			},
+			// 当前进度
+			current(){
+				return parseInt((this.activeWidth/this.w) * this.d)
+			},
+			activeDotStyle(){
+				return `left:${this.activeWidth}px`
+			},
+			r(){
+				return this.fullScreen ? this.ratio : 1
+			}
+		},
+		watch: {
+			c(newValue, oldValue) {
+				if (!this.moveStatus) {
+					this.activeWidth = this.d === 0 ? 0 : (this.c/this.d) * this.w
+				}
+			},
+			fullScreen(newValue, oldValue){
+				setTimeout(()=>{
+					this.getSize()
+				},100)
+			}
+		},
+		methods: {
+			// 获取进度条宽高
+			getSize() {
+				dom.getComponentRect(this.$refs.slider, option => {
+					this.w = option.size.width*this.r
+					this.l = option.size.left
+					console.log(option);
+				})
+			},
+			touchStart(e){
+				if (this.d == 0) return
+				this.moveStatus = true
+				let left = e.changedTouches[0].screenX*this.r
+				this.activeWidth = left - this.l
+			},
+			touchMove(e){
+				if (this.d == 0) return
+				let left = e.changedTouches[0].screenX*this.r
+				this.activeWidth = left - this.l
+				this.$emit('update',this.current)
+			},
+			touchEnd(e){
+				if (this.d == 0) return
+				this.moveStatus = false
+				this.$emit('change',this.current)
+			}
+		},
+	}
+</script>
+
+<style>
+.f-dot{
+	width: 30rpx;
+	height: 30rpx;
+	position: absolute;
+}
+.bg-noactive{
+	background-color: rgba(255,255,255,0.5);
+}
+</style>

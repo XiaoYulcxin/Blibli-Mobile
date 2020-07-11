@@ -1,0 +1,64 @@
+/* 本项目公共样式 */
+.bg-main{
+	background-color: #fb7299!important;
+}
+.bg-main-hover{
+	background-color: #ff85ad!important;
+}
+.bg-main-disabled{
+	background-color: #f89899!important;
+}
+.bg-input{
+	background-color: #F2F2F2!important;
+}
+
+.text-placeholder{
+	color: #999999!important;
+}
+.text-main{
+	color: #fb7299!important;
+}
+.text-main-hover{
+	color: #ff85ad!important;
+}
+.border-main{
+	border-color: #fb7299!important;
+}
+.line-h{
+	line-height: 1.2!important;
+}
+.f-divider{
+	height: 20rpx;background-color: #F5F5F4;
+}
+.f-list{
+	/* #ifndef APP-PLUS-NVUE */
+	display: flex;
+	/* #endif */
+	flex-wrap: wrap;
+	padding-left: 15rpx;
+	padding-right: 15rpx;
+}
+.f-list-item{
+	margin-left: 15rpx;
+	margin-right: 15rpx;
+	/* #ifndef APP-PLUS-NVUE */
+	box-sizing: border-box;
+	min-height: 5rpx;
+	/* #endif */
+	position: relative;
+}
+.f-list-item-1{
+	width: 100%;
+	/* #ifndef APP-PLUS-NVUE */
+	display: flex;
+	/* #endif */
+}
+.f-list-item-2{
+	width: 330rpx;
+}
+.f-list-item-3{
+	width: 210rpx;
+}
+.border-light-secondary{
+	border-color: #f4f4f4!important;
+}

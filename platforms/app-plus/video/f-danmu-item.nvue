@@ -1,0 +1,68 @@
+<template>
+	<div class="position-absolute rounded p-1" ref="move" :style="'left: '+width+'px;top: '+Math.random()*maxheight+'px;'" style="background-color: rgba(0,0,0,0.15);">
+		<text class="text-white" :style="'font-size: '+fontSize+'px;'">{{item.title}}</text>
+	</div>
+</template>
+
+<script>
+	const animation = weex.requireModule('animation');
+	let timer = null
+	export default {
+		props: {
+			fontSize:{
+				type: [Number,String],
+				default: 15
+			},
+			maxheight:{
+				type: [Number,String],
+				default: 100
+			},
+			width: {
+				type: [Number,String],
+				default: 0
+			},
+			item:Object,
+			index:Number
+		},
+		mounted() {
+			timer = setTimeout(()=>{
+				this.animate(this.$refs.move,()=>{
+					this.$emit('end',{
+						item:this.item,
+						index:this.index
+					})
+				})
+			},300)
+		},
+		beforeDestroy() {
+			if (timer) {
+				clearTimeout(timer)
+			}
+			this.$emit('end',{
+				item:this.item,
+				index:this.index
+			})
+		},
+		methods: {
+			async animate(el,fn = false){
+				animation.transition(el, {
+					styles: {
+						transform: `translate( -${this.width*2}px, 0px)`,
+					},
+					duration: 20000, //ms
+					timingFunction: 'ease',
+					delay: 0 //ms
+					}, () => {
+						if (typeof fn === 'function') {
+							fn()
+						}
+					}
+				)
+			}
+		},
+	}
+</script>
+
+<style>
+
+</style>

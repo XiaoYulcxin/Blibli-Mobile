@@ -1,0 +1,64 @@
+<template>
+	<div class="position-absolute left-0 right-0" :style="divStyle">
+		<f-danmu-item v-for="(item,index) in list" :key="index" :width="width"
+		:item="item" :index="index" v-if="current >= item.time && Math.abs(current - item.time) <= 40" :fontSize="fullScreen ? 10 : 15" @end="$emit('end',$event)"></f-danmu-item>
+	</div>
+</template> 
+
+<script>
+	import fDanmuItem from './f-danmu-item.nvue';
+	export default {
+		components: {
+			fDanmuItem
+		},
+		props: {
+			list:{
+				type:Array,
+				default:()=>[]
+			},
+			fullScreen:{
+				type:Boolean,
+				default:false
+			},
+			top: {
+				type: [Number,String],
+				default: "44"
+			},
+			bottom: {
+				type: [Number,String],
+				default: "66"
+			},
+			current:{
+				type: [Number,String],
+				default: 0
+			}
+		},
+		data() {
+			return {
+				// 屏幕宽高
+				windowWidth: 0,
+				windowHeight:0,
+			}
+		},
+		mounted() {
+			let res = uni.getSystemInfoSync()
+			this.windowWidth = res.screenWidth
+			this.windowHeight = res.screenHeight
+		},
+		computed: {
+			width(){
+				return this.fullScreen ? this.windowHeight : this.windowWidth
+			},
+			divStyle() {
+				return `top: ${this.top}px;bottom: ${this.bottom}px;` 
+			}
+		},
+		methods:{
+			
+		}
+	}
+</script>
+
+<style>
+
+</style>

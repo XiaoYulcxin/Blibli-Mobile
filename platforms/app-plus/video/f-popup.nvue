@@ -1,0 +1,91 @@
+<template>
+	<div class="f-popup-full" v-if="status">
+		<div ref="mask" class="f-popup-full f-mask" @click="hide"></div>
+		<div ref="popup" class="f-popup" :style="style">
+			<slot></slot>
+		</div>
+	</div>
+</template>
+
+<script>
+	const animation = weex.requireModule('animation');
+	export default {
+		props: {
+			width: {
+				type: Number,
+				default: 100
+			},
+		},
+		data() {
+			return {
+				status:false,
+			}
+		},
+		computed: {
+			style() {
+				return `width: ${this.width}px;transform: translateX(${this.width}px);` 
+			}
+		},
+		methods:{
+			show(){
+				this.status = true
+				this.animate({
+					opacity:1
+				},this.$refs.mask)
+				this.animate({
+					transform: `translateX(0px, 0px)`,
+					opacity:1
+				},this.$refs.popup)
+			},
+			hide(){
+				if (this.status) {
+					this.animate({
+						transform: `translateX(0px, ${this.width}px)`,
+						opacity:0
+					},this.$refs.popup)
+					this.animate({
+						opacity:0
+					},this.$refs.mask,()=>{
+						this.status = false
+					})
+				}
+			},
+			animate(options,el,fun = false){
+				animation.transition(el, {
+					styles: options,
+					duration: 100, //ms
+					timingFunction: 'ease-in-out',
+					delay: 0 //ms
+					}, () => {
+						if (typeof fun === 'function') {
+							fun()
+						}
+					}
+				)
+			},
+		}
+	}
+</script>
+
+<style>
+.f-popup-full{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.f-mask{
+	opacity: 0;
+}
+.f-popup{
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	flex-direction: column;
+	justify-content: center;
+	background-color: rgba(0,0,0,0.8);
+	opacity: 0;
+}
+</style>
